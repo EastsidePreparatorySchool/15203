@@ -31,6 +31,7 @@ package org.eastsideprep.ftc;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp(name = "15203: Teleop Simple", group = "15203")
 
@@ -55,6 +56,7 @@ public class Simple15203 extends LinearOpMode {
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
+        robot.armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         waitForStart();
 
 
@@ -67,11 +69,14 @@ public class Simple15203 extends LinearOpMode {
 
             robot.leftMotor.setPower(left);
             robot.rightMotor.setPower(right);
-            if (armU) {robot.armMotor.setPower(0.5);}
-            else{robot.armMotor.setPower(0.0);}
+            if (armU) {
+                robot.armMotor.setPower(0.5);
+            } else if (armD) {
+                robot.armMotor.setPower(-0.2);
+            } else {
+                robot.armMotor.setPower(0.0);
+            }
 
-            if (armD) {robot.armMotor.setPower(-0.5);}
-            else{robot.armMotor.setPower(0.0);}
 
 
 //            //TODO: Servos
