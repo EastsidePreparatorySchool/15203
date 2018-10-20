@@ -43,11 +43,8 @@ public class Simple15203 extends LinearOpMode {
     public void runOpMode() {
         double left;
         double right;
-        double up;
-        double down;
-        double position;
-        int hitCount = 0;
-
+        boolean armU;
+        boolean armD;
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
          */
@@ -60,20 +57,21 @@ public class Simple15203 extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
+
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-            left = -gamepad1.left_stick_y;
-            right = -gamepad1.right_stick_y;
+            left = gamepad1.left_stick_y; //negative is backwards / positive is forwards
+            right = gamepad1.right_stick_y;
+            armU = gamepad1.dpad_up;
+            armD = gamepad1.dpad_down;
 
-            robot.leftFrontMotor.setPower(left);
-            robot.rightFrontMotor.setPower(right);
-            robot.leftBackMotor.setPower(left);
-            robot.rightBackMotor.setPower(right);
+            robot.leftMotor.setPower(left);
+            robot.rightMotor.setPower(right);
+            if (armU) {robot.armMotor.setPower(0.5);}
+            else{robot.armMotor.setPower(0.0);}
 
-
-
-
-
+            if (armD) {robot.armMotor.setPower(-0.5);}
+            else{robot.armMotor.setPower(0.0);}
 
 
 //            //TODO: Servos

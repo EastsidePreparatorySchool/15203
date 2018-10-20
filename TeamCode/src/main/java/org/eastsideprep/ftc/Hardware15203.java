@@ -13,13 +13,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 public class Hardware15203 {
     /* Public OpMode members. */
-    public DcMotor leftFrontMotor = null;
-    public DcMotor rightFrontMotor = null;
-    public DcMotor leftBackMotor = null;
-    public DcMotor rightBackMotor = null;
-    public AnalogInput a0 = null;
-    public DigitalChannel d0 = null;
-    final public double MAX_ROTATION_WEIGHT = 1.0;
+    public DcMotor leftMotor = null;
+    public DcMotor rightMotor = null;
+    public DcMotor armMotor = null;
 
 
     /* local OpMode members. */
@@ -38,31 +34,28 @@ public class Hardware15203 {
         // hey bob
 
         // Define and Initialize Motors
-        leftFrontMotor = hwMap.dcMotor.get("lfm");
-        rightFrontMotor = hwMap.dcMotor.get("rfm");
-        leftBackMotor = hwMap.dcMotor.get("lbm");
-        rightBackMotor = hwMap.dcMotor.get("rbm");
-       
+        leftMotor = hwMap.dcMotor.get("L");
+        rightMotor = hwMap.dcMotor.get("R");
+        armMotor = hwMap.dcMotor.get("A");
 
 
 
 
-        leftFrontMotor.setDirection(DcMotor.Direction.REVERSE);
-        rightFrontMotor.setDirection(DcMotor.Direction.FORWARD);
-        leftBackMotor.setDirection(DcMotor.Direction.REVERSE);
-        rightBackMotor.setDirection(DcMotor.Direction.FORWARD);
+
+        leftMotor.setDirection(DcMotor.Direction.REVERSE);
+        rightMotor.setDirection(DcMotor.Direction.FORWARD);
+        armMotor.setDirection(DcMotor.Direction.FORWARD);
+
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
-        leftFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftBackMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightBackMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        leftFrontMotor.setPower(0.0);
-        rightFrontMotor.setPower(0.0);
-        leftBackMotor.setPower(0.0);
-        rightBackMotor.setPower(0.0);
+        leftMotor.setPower(0.0);
+        rightMotor.setPower(0.0);
+        armMotor.setPower(0.0);
     }
 
     /***
