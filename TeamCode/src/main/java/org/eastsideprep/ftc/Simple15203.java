@@ -48,6 +48,9 @@ public class Simple15203 extends LinearOpMode {
         boolean armD;
         boolean hoist;
         boolean release;
+        boolean slowdrive;
+        boolean sd_changed = false;
+
 
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
@@ -61,6 +64,7 @@ public class Simple15203 extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         robot.armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         waitForStart();
+        slowdrive = false;
 
 
         // run until the end of the match (driver presses STOP)
@@ -72,8 +76,23 @@ public class Simple15203 extends LinearOpMode {
             hoist = gamepad1.x;
             release = gamepad1.b;
 
+
+            if (!sd_changed && gamepad1.left_bumper) {
+                slowdrive = !slowdrive;
+                sd_changed = true;
+            } else {
+                sd_changed = false;
+            }
+
+            if (slowdrive) {
+                left *= 0.05;
+                right *= 0.05;
+            }
+
+
             robot.leftMotor.setPower(left);
             robot.rightMotor.setPower(right);
+
             if (hoist) {
                 robot.armMotor.setPower(-1.0);
             } else if (release) {
@@ -85,9 +104,6 @@ public class Simple15203 extends LinearOpMode {
             } else {
                 robot.armMotor.setPower(0.0);
             }
-
-
-
 
 
 //            //TODO: Servos
@@ -133,7 +149,8 @@ public class Simple15203 extends LinearOpMode {
             // Send telemetry message to signify robot running;
             telemetry.addLine()
                     .addData("left", "%.2f", left)
-                    .addData("right", "%.2f", right);
+                    .addData("right", "%.2f", right)
+                    .addData("slow", "%s", slowdrive?"on":"off");
             telemetry.addLine();
             telemetry.update();
 
