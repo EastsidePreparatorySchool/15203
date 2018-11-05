@@ -52,6 +52,7 @@ public class Simple15203 extends LinearOpMode {
         boolean sd_changed = false;
 
 
+
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
          */
@@ -77,6 +78,8 @@ public class Simple15203 extends LinearOpMode {
             release = gamepad1.b;
 
 
+
+
             if (!sd_changed && gamepad1.left_bumper) {
                 slowdrive = !slowdrive;
                 sd_changed = true;
@@ -92,6 +95,8 @@ public class Simple15203 extends LinearOpMode {
 
             robot.leftMotor.setPower(left);
             robot.rightMotor.setPower(right);
+
+
 
             if (hoist) {
                 robot.armMotor.setPower(-1.0);

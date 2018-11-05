@@ -64,7 +64,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Pushbot: Auto Drive By Encoder", group="Pushbot")
+@Autonomous(name="USE ONLY WHEN CLOSER TO CRATER", group="Pushbot")
 
 public class Auto15203 extends LinearOpMode {
 
@@ -108,19 +108,17 @@ public class Auto15203 extends LinearOpMode {
         */
         //Wait for the game to start (driver presses PLAY)
         //2000 ms for 360 degree neutral turn
+        //1.0 drive motors = back away from hook
         waitForStart();
-        robot.leftMotor.setPower(1.0);
-        robot.leftMotor.setPower(1.0);
-        sleep(100);
-        robot.leftMotor.setPower(1.0);
-        robot.rightMotor.setPower(-1.0);
-        sleep(400);
+
         robot.leftMotor.setPower(1.0);
         robot.rightMotor.setPower(1.0);
-        sleep(1800);
+        sleep(1850);
+
         robot.leftMotor.setPower(0.0);
         robot.rightMotor.setPower(0.0);
-        sleep(1000);
+        sleep(500);
+
 
 
 
