@@ -42,14 +42,14 @@ public class Simple15203 extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        double left;
+       /* double left;
         double right;
         boolean armU;
         boolean armD;
         boolean hoist;
-        boolean release;
-        boolean slowdrive;
-        boolean sd_changed = false;
+        boolean release; */
+        //boolean slowdrive;
+        //boolean sd_changed = false;
 
 
 
@@ -63,23 +63,53 @@ public class Simple15203 extends LinearOpMode {
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
-        robot.armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        //robot.armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         waitForStart();
-        slowdrive = false;
+       // slowdrive = false;
 
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-            left = gamepad1.left_stick_y; //negative is backwards / positive is forwards
-            right = gamepad1.right_stick_y;
-            armU = gamepad1.dpad_up;
-            armD = gamepad1.dpad_down;
-            hoist = gamepad1.x;
-            release = gamepad1.b;
+            float x = gamepad1.left_stick_x;
+            float y = -gamepad1.left_stick_y; // Negate to get +y forward.
+            float rotation = -gamepad1.right_stick_x;
+            float speedControl = 0.5f*(1.0f + gamepad1.left_trigger);
+            double biggestControl = Math.sqrt(x*x+y*y);
+            double biggestWithRotation = Math.sqrt(x*x+y*y+rotation*rotation);
+
+            double angle = Math.atan2(y,-x) - Math.PI/2.0;
+
+            double[] powers = robot.getDrivePowersFromAngle(angle);
+            double pow2 = 0.0;
+            for (int i=0; i<robot.allMotors.length; i++)
+            {
+                double pow = powers[i]*biggestControl + rotation * robot.rotationArray[i];
+                powers[i] = pow;
+                pow2 += pow*pow;
+            }
+
+            if (biggestWithRotation != 0.0) {
+                double scale = Math.sqrt(pow2);
+                for (int i = 0; i < robot.allMotors.length; i++) {
+                    robot.allMotors[i].setPower(
+                            powers[i]/scale*biggestWithRotation*speedControl);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < robot.allMotors.length; i++)
+                    robot.allMotors[i].setPower(0.0);
+            }
+
+
+            // armU = gamepad1.dpad_up;
+          //  armD = gamepad1.dpad_down;
+          //  hoist = gamepad1.x;
+           // release = gamepad1.b;
 
 
 
-
+/*
             if (!sd_changed && gamepad1.left_bumper) {
                 slowdrive = !slowdrive;
                 sd_changed = true;
@@ -87,17 +117,12 @@ public class Simple15203 extends LinearOpMode {
                 sd_changed = false;
             }
 
-            if (slowdrive) {
-                left *= 0.05;
-                right *= 0.05;
-            }
 
-
-            robot.leftMotor.setPower(left);
-            robot.rightMotor.setPower(right);
+*/
 
 
 
+/*
             if (hoist) {
                 robot.armMotor.setPower(-1.0);
             } else if (release) {
@@ -109,7 +134,7 @@ public class Simple15203 extends LinearOpMode {
             } else {
                 robot.armMotor.setPower(0.0);
             }
-
+*/
 
 //            //TODO: Servos
 //            // Use gamepad Y & A raise and lower the arm
@@ -152,10 +177,10 @@ public class Simple15203 extends LinearOpMode {
 
 
             // Send telemetry message to signify robot running;
-            telemetry.addLine()
-                    .addData("left", "%.2f", left)
-                    .addData("right", "%.2f", right)
-                    .addData("slow", "%s", slowdrive?"on":"off");
+           // telemetry.addLine()
+                   // .addData("left", "%.2f", left)
+                    //.addData("right", "%.2f", right)
+                   // .addData("slow", "%s", slowdrive?"on":"off");
             telemetry.addLine();
             telemetry.update();
 

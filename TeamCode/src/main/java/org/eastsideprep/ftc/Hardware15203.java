@@ -13,9 +13,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 public class Hardware15203 {
     /* Public OpMode members. */
-    public DcMotor leftMotor = null;
-    public DcMotor rightMotor = null;
-    public DcMotor armMotor = null;
+    public DcMotor leftFrontMotor = null;
+    public DcMotor rightFrontMotor = null;
+    public DcMotor leftBackMotor = null;
+    public DcMotor rightBackMotor = null;
+    public DcMotor [] allMotors;
+    double [] rotationArray;
 
 
     /* local OpMode members. */
@@ -34,38 +37,59 @@ public class Hardware15203 {
         // hey bob
 
         // Define and Initialize Motors
-        leftMotor = hwMap.dcMotor.get("L");
-        rightMotor = hwMap.dcMotor.get("R");
-        armMotor = hwMap.dcMotor.get("A");
+        leftFrontMotor = hwMap.dcMotor.get("LF");
+        rightFrontMotor = hwMap.dcMotor.get("RF");
+        leftBackMotor = hwMap.dcMotor.get("LB");
+        rightBackMotor = hwMap.dcMotor.get("RB");
+
+        allMotors = new DcMotor[]{ leftFrontMotor, rightFrontMotor, leftBackMotor, rightBackMotor};
+        rotationArray= new double[]{-1.0, 1.0, -1.0, 1.0};
 
 
-
-
-
-        leftMotor.setDirection(DcMotor.Direction.REVERSE);
-        rightMotor.setDirection(DcMotor.Direction.FORWARD);
-        armMotor.setDirection(DcMotor.Direction.FORWARD);
+        leftBackMotor.setDirection(DcMotor.Direction.REVERSE);
+        rightBackMotor.setDirection(DcMotor.Direction.FORWARD);
+        leftFrontMotor.setDirection(DcMotor.Direction.REVERSE);
+        rightFrontMotor.setDirection(DcMotor.Direction.FORWARD);
 
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
-        leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        leftMotor.setPower(0.0);
-        rightMotor.setPower(0.0);
-        armMotor.setPower(0.0);
+        //armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        for (DcMotor m : allMotors) {
+            m.setPower(0.0);
+            m.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            m.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            //armMotor.setPower(0.0);
+        }
+
+
+    }
+    public double[] getDrivePowersFromAngle(double angle) {
+        double[] unscaledPowers = new double[4];
+        unscaledPowers[0] = Math.sin(angle + Math.PI / 4);
+        unscaledPowers[1] = Math.cos(angle + Math.PI / 4);
+        unscaledPowers[2] = unscaledPowers[1];
+        unscaledPowers[3] = unscaledPowers[0];
+        return unscaledPowers;
     }
 
+
     /***
-     *
-     * waitForTick implements a periodic delay. However, this acts like a metronome with a regular
-     * periodic tick.  This is used to compensate for varying processing times for each cycle.
-     * The function looks at the elapsed cycle time, and sleeps for the remaining time interval.
-     *
-     * @param periodMs  Length of wait cycle in mSec.
-     */
+         *
+         * waitForTick implements a periodic delay. However, this acts like a metronome with a regular
+         * periodic tick.  This is used to compensate for varying processing times for each cycle.
+         * The function looks at the elapsed cycle time, and sleeps for the remaining time interval.
+         *
+         * @param periodMs  Length of wait cycle in mSec.
+         */
+
 
     public void waitForTick(long periodMs) {
 

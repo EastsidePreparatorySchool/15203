@@ -111,12 +111,16 @@ public class Auto15203 extends LinearOpMode {
         //1.0 drive motors = back away from hook
         waitForStart();
 
-        robot.leftMotor.setPower(1.0);
-        robot.rightMotor.setPower(1.0);
+        robot.leftFrontMotor.setPower(1.0);
+        robot.rightFrontMotor.setPower(1.0);
+        robot.leftBackMotor.setPower(1.0);
+        robot.rightBackMotor.setPower(1.0);
         sleep(1850);
 
-        robot.leftMotor.setPower(0.0);
-        robot.rightMotor.setPower(0.0);
+        robot.leftFrontMotor.setPower(0.0);
+        robot.rightFrontMotor.setPower(0.0);
+        robot.leftBackMotor.setPower(0.0);
+        robot.rightBackMotor.setPower(0.0);
         sleep(500);
 
 
