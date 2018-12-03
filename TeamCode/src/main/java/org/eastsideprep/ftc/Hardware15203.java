@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
@@ -17,6 +18,8 @@ public class Hardware15203 {
     public DcMotor rightFrontMotor = null;
     public DcMotor leftBackMotor = null;
     public DcMotor rightBackMotor = null;
+    public DcMotor armMotor = null;
+    public Servo marker = null;
     public DcMotor [] allMotors;
     double [] rotationArray;
 
@@ -41,6 +44,8 @@ public class Hardware15203 {
         rightFrontMotor = hwMap.dcMotor.get("RF");
         leftBackMotor = hwMap.dcMotor.get("LB");
         rightBackMotor = hwMap.dcMotor.get("RB");
+        armMotor = hwMap.dcMotor.get("A");
+        marker = hwMap.servo.get("M");
 
         allMotors = new DcMotor[]{ leftFrontMotor, rightFrontMotor, leftBackMotor, rightBackMotor};
         rotationArray= new double[]{-1.0, 1.0, -1.0, 1.0};
@@ -51,6 +56,8 @@ public class Hardware15203 {
         leftFrontMotor.setDirection(DcMotor.Direction.FORWARD);
         rightFrontMotor.setDirection(DcMotor.Direction.REVERSE);
 
+        marker.setPosition(1.0);
+
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
@@ -59,14 +66,14 @@ public class Hardware15203 {
         leftBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        //armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         for (DcMotor m : allMotors) {
             m.setPower(0.0);
             m.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             m.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            //armMotor.setPower(0.0);
+
         }
 
 

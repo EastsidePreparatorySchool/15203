@@ -30,12 +30,8 @@
 package org.eastsideprep.ftc;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
 /**
  * This file illustrates the concept of driving a path based on encoder counts.
@@ -64,9 +60,9 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="USE ONLY WHEN CLOSER TO CRATER", group="Pushbot")
+@Autonomous(name="CLOSE TO DEPOT", group="Pushbot")
 
-public class Auto15203 extends LinearOpMode {
+public class Auto15203DEPOT extends LinearOpMode {
 
     /* Declare OpMode members. */
     Hardware15203 robot = new Hardware15203();   // Use a Pushbot's hardware
@@ -112,55 +108,29 @@ public class Auto15203 extends LinearOpMode {
         //1000 ms for quarter turn
         waitForStart();
 
+
+
         robot.leftFrontMotor.setPower(-1.0);
         robot.rightFrontMotor.setPower(-1.0);
         robot.leftBackMotor.setPower(-1.0);
         robot.rightBackMotor.setPower(-1.0);
-        sleep(1700);
+        sleep(2700);
 
-        robot.leftFrontMotor.setPower(1.0);
-        robot.rightFrontMotor.setPower(1.0);
-        robot.leftBackMotor.setPower(1.0);
-        robot.rightBackMotor.setPower(1.0);
-        sleep(800);
-
-        robot.leftFrontMotor.setPower(1.0);
-        robot.leftBackMotor.setPower(1.0);
-        robot.rightFrontMotor.setPower(-1.0);
-        robot.rightBackMotor.setPower(-1.0);
-        sleep(1000);
-
-        robot.leftFrontMotor.setPower(1.0);
-        robot.rightFrontMotor.setPower(1.0);
-        robot.leftBackMotor.setPower(1.0);
-        robot.rightBackMotor.setPower(1.0);
-        sleep(2300);
-
-        robot.leftFrontMotor.setPower(-1.0);
-        robot.leftBackMotor.setPower(-1.0);
-        robot.rightFrontMotor.setPower(1.0);
-        robot.rightBackMotor.setPower(1.0);
-        sleep(500);
-
-        robot.leftFrontMotor.setPower(1.0);
-        robot.rightFrontMotor.setPower(1.0);
-        robot.leftBackMotor.setPower(1.0);
-        robot.rightBackMotor.setPower(1.0);
-        sleep(3100);
-
-        robot.leftFrontMotor.setPower(-1.0);
-        robot.leftBackMotor.setPower(-1.0);
-        robot.rightFrontMotor.setPower(1.0);
-        robot.rightBackMotor.setPower(1.0);
         robot.marker.setPosition(0.0);
-        sleep(2100wwwwwww00);
+        robot.leftFrontMotor.setPower(-1.0);
+        robot.leftBackMotor.setPower(-1.0);
+        robot.rightFrontMotor.setPower(1.0);
+        robot.rightBackMotor.setPower(1.0);
+
+        sleep(600);
+
 
 
         robot.leftFrontMotor.setPower(1.0);
         robot.rightFrontMotor.setPower(1.0);
         robot.leftBackMotor.setPower(1.0);
         robot.rightBackMotor.setPower(1.0);
-        sleep(4100);
+        sleep(4000);
 
 
         robot.leftFrontMotor.setPower(0.0);
