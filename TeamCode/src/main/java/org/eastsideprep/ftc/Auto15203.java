@@ -110,66 +110,17 @@ public class Auto15203 extends LinearOpMode {
         //2000 ms for 360 degree neutral turn
         //-1.0 drive motors = back away from hook
         //1000 ms for quarter turn
+        //1800 ms for 32 inches
         waitForStart();
 
-        robot.leftFrontMotor.setPower(-1.0);
-        robot.rightFrontMotor.setPower(-1.0);
-        robot.leftBackMotor.setPower(-1.0);
-        robot.rightBackMotor.setPower(-1.0);
-        sleep(1700);
+robot.winchMotor.setPower(1.0);
+sleep(20000);
 
-        robot.leftFrontMotor.setPower(1.0);
-        robot.rightFrontMotor.setPower(1.0);
-        robot.leftBackMotor.setPower(1.0);
-        robot.rightBackMotor.setPower(1.0);
-        sleep(800);
-
-        robot.leftFrontMotor.setPower(1.0);
-        robot.leftBackMotor.setPower(1.0);
-        robot.rightFrontMotor.setPower(-1.0);
-        robot.rightBackMotor.setPower(-1.0);
-        sleep(1000);
-
-        robot.leftFrontMotor.setPower(1.0);
-        robot.rightFrontMotor.setPower(1.0);
-        robot.leftBackMotor.setPower(1.0);
-        robot.rightBackMotor.setPower(1.0);
-        sleep(2300);
-
-        robot.leftFrontMotor.setPower(-1.0);
-        robot.leftBackMotor.setPower(-1.0);
-        robot.rightFrontMotor.setPower(1.0);
-        robot.rightBackMotor.setPower(1.0);
-        sleep(500);
-
-        robot.leftFrontMotor.setPower(1.0);
-        robot.rightFrontMotor.setPower(1.0);
-        robot.leftBackMotor.setPower(1.0);
-        robot.rightBackMotor.setPower(1.0);
-        sleep(3100);
-
-        robot.leftFrontMotor.setPower(-1.0);
-        robot.leftBackMotor.setPower(-1.0);
-        robot.rightFrontMotor.setPower(1.0);
-        robot.rightBackMotor.setPower(1.0);
-        robot.marker.setPosition(0.0);
-        sleep(2100wwwwwww00);
-
-
-        robot.leftFrontMotor.setPower(1.0);
-        robot.rightFrontMotor.setPower(1.0);
-        robot.leftBackMotor.setPower(1.0);
-        robot.rightBackMotor.setPower(1.0);
-        sleep(4100);
-
-
-        robot.leftFrontMotor.setPower(0.0);
-        robot.rightFrontMotor.setPower(0.0);
-        robot.leftBackMotor.setPower(0.0);
-        robot.rightBackMotor.setPower(0.0);
-        sleep(500);
-
-
+robot.rightFrontMotor.setPower(-1.0);
+robot.rightBackMotor.setPower(1.0);
+robot.leftBackMotor.setPower(-1.0);
+robot.leftFrontMotor.setPower(1.0);
+sleep(1000);
 
 
         // Step through each leg of the path,

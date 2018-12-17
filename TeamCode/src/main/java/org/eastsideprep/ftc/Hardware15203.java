@@ -18,7 +18,8 @@ public class Hardware15203 {
     public DcMotor rightFrontMotor = null;
     public DcMotor leftBackMotor = null;
     public DcMotor rightBackMotor = null;
-    public DcMotor armMotor = null;
+    public DcMotor winchMotor = null;
+    public DcMotor returnMotor = null;
     public Servo marker = null;
     public DcMotor [] allMotors;
     double [] rotationArray;
@@ -44,7 +45,8 @@ public class Hardware15203 {
         rightFrontMotor = hwMap.dcMotor.get("RF");
         leftBackMotor = hwMap.dcMotor.get("LB");
         rightBackMotor = hwMap.dcMotor.get("RB");
-        armMotor = hwMap.dcMotor.get("A");
+        winchMotor = hwMap.dcMotor.get("W");
+        returnMotor = hwMap.dcMotor.get("RE");
         marker = hwMap.servo.get("M");
 
         allMotors = new DcMotor[]{ leftFrontMotor, rightFrontMotor, leftBackMotor, rightBackMotor};
@@ -56,6 +58,9 @@ public class Hardware15203 {
         leftFrontMotor.setDirection(DcMotor.Direction.FORWARD);
         rightFrontMotor.setDirection(DcMotor.Direction.REVERSE);
 
+        winchMotor.setDirection(DcMotor.Direction.FORWARD);
+        returnMotor.setDirection(DcMotor.Direction.FORWARD);
+
         marker.setPosition(1.0);
 
 
@@ -66,7 +71,8 @@ public class Hardware15203 {
         leftBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        winchMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        returnMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         for (DcMotor m : allMotors) {
             m.setPower(0.0);

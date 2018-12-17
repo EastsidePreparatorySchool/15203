@@ -110,34 +110,13 @@ public class Auto15203DEPOT extends LinearOpMode {
 
 
 
-        robot.leftFrontMotor.setPower(-1.0);
+        robot.winchMotor.setPower(1.0);
+        sleep(20000);
         robot.rightFrontMotor.setPower(-1.0);
-        robot.leftBackMotor.setPower(-1.0);
-        robot.rightBackMotor.setPower(-1.0);
-        sleep(2700);
-
-        robot.marker.setPosition(0.0);
-        robot.leftFrontMotor.setPower(-1.0);
-        robot.leftBackMotor.setPower(-1.0);
-        robot.rightFrontMotor.setPower(1.0);
         robot.rightBackMotor.setPower(1.0);
-
-        sleep(600);
-
-
-
+        robot.leftBackMotor.setPower(-1.0);
         robot.leftFrontMotor.setPower(1.0);
-        robot.rightFrontMotor.setPower(1.0);
-        robot.leftBackMotor.setPower(1.0);
-        robot.rightBackMotor.setPower(1.0);
-        sleep(4000);
-
-
-        robot.leftFrontMotor.setPower(0.0);
-        robot.rightFrontMotor.setPower(0.0);
-        robot.leftBackMotor.setPower(0.0);
-        robot.rightBackMotor.setPower(0.0);
-        sleep(500);
+        sleep(1000);
 
 
 
