@@ -47,7 +47,7 @@ public class Simple15203 extends LinearOpMode {
         boolean armU;
         boolean armD;
         boolean hoist;
-
+        boolean release;
 
 
 
@@ -98,6 +98,8 @@ public class Simple15203 extends LinearOpMode {
 
             armU = gamepad1.dpad_up;
             armD = gamepad1.dpad_down;
+            hoist = gamepad1.x;
+            release = gamepad1.b;
 
 
 
@@ -113,16 +115,17 @@ public class Simple15203 extends LinearOpMode {
 */
 
 
-            if (armU) {
-                robot.returnMotor.setPower(-0.6);
-                robot.winchMotor.setPower(1.0);
+            if (hoist) {
+                robot.armMotor.setPower(-1.0);
+            } else if (release) {
+                robot.armMotor.setPower(1.0);
+            } else if (armU) {
+                robot.armMotor.setPower(0.2);
             } else if (armD) {
-                robot.winchMotor.setPower(-1.0);
-
+                robot.armMotor.setPower(-0.2);
             } else {
-                robot.winchMotor.setPower(0.0);
-                robot.returnMotor.setPower(0.0);
-        }
+                robot.armMotor.setPower(0.0);
+            }
 
 
 //            //TODO: Servos
